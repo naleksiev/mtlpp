@@ -129,32 +129,52 @@ namespace mtlpp
     }
 
     FunctionConstant::FunctionConstant() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstant alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     ns::String FunctionConstant::GetName() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLFunctionConstant*)m_ptr name] };
+#else
+        return ns::Handle{ nullptr };
+#endif
     }
 
     DataType FunctionConstant::GetType() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return DataType([(__bridge MTLFunctionConstant*)m_ptr type]);
+#else
+        return DataType(0);
+#endif
     }
 
     uint32_t FunctionConstant::GetIndex() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLFunctionConstant*)m_ptr index]);
+#else
+        return 0;
+#endif
     }
 
     bool FunctionConstant::IsRequired() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return [(__bridge MTLFunctionConstant*)m_ptr required];
+#else
+        return false;
+#endif
     }
 
     ns::String Function::GetLabel() const
