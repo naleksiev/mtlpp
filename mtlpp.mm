@@ -1852,44 +1852,72 @@ namespace mtlpp
     }
 
     Attribute::Attribute() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLAttribute alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     ns::String Attribute::GetName() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLAttribute*)m_ptr name] };
+#else
+        return ns::Handle{ nullptr };
+#endif
     }
 
     uint32_t Attribute::GetAttributeIndex() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttribute*)m_ptr attributeIndex]);
+#else
+        return 0;
+#endif
     }
 
     DataType Attribute::GetAttributeType() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return DataType([(__bridge MTLAttribute*)m_ptr attributeType]);
+#else
+        return DataType(0);
+#endif
     }
 
     bool Attribute::IsActive() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return [(__bridge MTLAttribute*)m_ptr isActive];
+#else
+        return false;
+#endif
     }
 
     bool Attribute::IsPatchData() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return [(__bridge MTLAttribute*)m_ptr isActive];
+#else
+        return false;
+#endif
     }
 
     bool Attribute::IsPatchControlPointData() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return [(__bridge MTLAttribute*)m_ptr isActive];
+#else
+        return false;
+#endif
     }
 
     FunctionConstant::FunctionConstant() :
@@ -3834,6 +3862,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stride]);
+#else
+        return 0;
 #endif
     }
 
@@ -3842,6 +3872,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return StepFunction([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepFunction]);
+#else
+        return StepFunction(0);
 #endif
     }
 
@@ -3850,6 +3882,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepRate]);
+#else
+        return 0;
 #endif
     }
 
@@ -3891,6 +3925,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return AttributeFormat([(__bridge MTLAttributeDescriptor*)m_ptr format]);
+#else
+        return AttributeFormat(0);
 #endif
     }
 
@@ -3899,6 +3935,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr offset]);
+#else
+        return 0;
 #endif
     }
 
@@ -3907,6 +3945,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr bufferIndex]);
+#else
+        return 0;
 #endif
     }
 
@@ -3948,6 +3988,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr layouts] };
+#else
+        return ns::Handle{ nullptr };
 #endif
     }
 
@@ -3956,6 +3998,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr attributes] };
+#else
+        return ns::Handle{ nullptr };
 #endif
     }
 
@@ -3964,18 +4008,22 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return IndexType([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexType]);
+#else
+        return IndexType(0);
 #endif
     }
 
     uint32_t StageInputOutputDescriptor::GetIndexBufferIndex() const
-    {
+   {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexBufferIndex]);
+#else
+        return 0;
 #endif
     }
 
-    void StageInputOutputDescriptor::SetIndexType(IndexType indexType)
+   void StageInputOutputDescriptor::SetIndexType(IndexType indexType)
     {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
