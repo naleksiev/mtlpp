@@ -339,13 +339,13 @@ namespace mtlpp
         return [(__bridge id<MTLTexture>)m_ptr isFramebufferOnly];
     }
 
-    void Texture::GetBytes(void* pixelBytes, uint32_t bytesPerRow, uint32_t bytesPerImage, const Region& region, uint32_t mipmapLevel, uint32_t slice)
+    void Texture::GetBytes(void* pixelBytes, uint32_t bytesPerRow, uint32_t bytesPerImage, const Region& fromRegion, uint32_t mipmapLevel, uint32_t slice)
     {
         Validate();
         [(__bridge id<MTLTexture>)m_ptr getBytes:pixelBytes
                                      bytesPerRow:bytesPerRow
                                    bytesPerImage:bytesPerImage
-                                      fromRegion:MTLRegionMake3D(region.Origin.X, region.Origin.Y, region.Origin.Z, region.Size.Width, region.Size.Height, region.Size.Depth)
+                                      fromRegion:MTLRegionMake3D(fromRegion.Origin.X, fromRegion.Origin.Y, fromRegion.Origin.Z, fromRegion.Size.Width, fromRegion.Size.Height, fromRegion.Size.Depth)
                                      mipmapLevel:mipmapLevel
                                            slice:slice];
     }
@@ -361,12 +361,12 @@ namespace mtlpp
                                         bytesPerImage:bytesPerImage];
     }
 
-    void Texture::GetBytes(void* pixelBytes, uint32_t bytesPerRow, const Region& region, uint32_t mipmapLevel)
+    void Texture::GetBytes(void* pixelBytes, uint32_t bytesPerRow, const Region& fromRegion, uint32_t mipmapLevel)
     {
         Validate();
         [(__bridge id<MTLTexture>)m_ptr getBytes:pixelBytes
                                      bytesPerRow:bytesPerRow
-                                      fromRegion:MTLRegionMake3D(region.Origin.X, region.Origin.Y, region.Origin.Z, region.Size.Width, region.Size.Height, region.Size.Depth)
+                                      fromRegion:MTLRegionMake3D(fromRegion.Origin.X, fromRegion.Origin.Y, fromRegion.Origin.Z, fromRegion.Size.Width, fromRegion.Size.Height, fromRegion.Size.Depth)
                                      mipmapLevel:mipmapLevel];
     }
 

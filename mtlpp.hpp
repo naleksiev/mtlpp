@@ -697,9 +697,9 @@ namespace mtlpp
         TextureUsage GetUsage() const;
         bool         IsFrameBufferOnly() const;
 
-        void GetBytes(void* pixelBytes, uint32_t bytesPerRow, uint32_t bytesPerImage, const Region& region, uint32_t mipmapLevel, uint32_t slice);
+        void GetBytes(void* pixelBytes, uint32_t bytesPerRow, uint32_t bytesPerImage, const Region& fromRegion, uint32_t mipmapLevel, uint32_t slice);
         void Replace(const Region& region, uint32_t mipmapLevel, uint32_t slice, void* pixelBytes, uint32_t bytesPerRow, uint32_t bytesPerImage);
-        void GetBytes(void* pixelBytes, uint32_t bytesPerRow, const Region& region, uint32_t mipmapLevel);
+        void GetBytes(void* pixelBytes, uint32_t bytesPerRow, const Region& fromRegion, uint32_t mipmapLevel);
         void Replace(const Region& region, uint32_t mipmapLevel, void* pixelBytes, uint32_t bytesPerRow);
         Texture NewTextureView(PixelFormat pixelFormat);
         Texture NewTextureView(PixelFormat pixelFormat, TextureType textureType, const ns::Range& mipmapLevelRange, const ns::Range& sliceRange);
