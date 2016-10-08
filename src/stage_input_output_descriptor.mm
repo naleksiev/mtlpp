@@ -24,6 +24,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stride]);
+#else
+        return 0;
 #endif
     }
 
@@ -32,6 +34,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return StepFunction([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepFunction]);
+#else
+        return StepFunction(0);
 #endif
     }
 
@@ -40,6 +44,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepRate]);
+#else
+        return 0;
 #endif
     }
 
@@ -81,6 +87,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return AttributeFormat([(__bridge MTLAttributeDescriptor*)m_ptr format]);
+#else
+        return AttributeFormat(0);
 #endif
     }
 
@@ -89,6 +97,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr offset]);
+#else
+        return 0;
 #endif
     }
 
@@ -97,6 +107,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr bufferIndex]);
+#else
+        return 0;
 #endif
     }
 
@@ -138,6 +150,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr layouts] };
+#else
+        return ns::Handle{ nullptr };
 #endif
     }
 
@@ -146,6 +160,8 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr attributes] };
+#else
+        return ns::Handle{ nullptr };
 #endif
     }
 
@@ -154,18 +170,22 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return IndexType([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexType]);
+#else
+        return IndexType(0);
 #endif
     }
 
     uint32_t StageInputOutputDescriptor::GetIndexBufferIndex() const
-    {
+   {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexBufferIndex]);
+#else
+        return 0;
 #endif
     }
 
-    void StageInputOutputDescriptor::SetIndexType(IndexType indexType)
+   void StageInputOutputDescriptor::SetIndexType(IndexType indexType)
     {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
