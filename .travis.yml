@@ -1,4 +1,9 @@
 language: cpp
 
+matrix:
+  include:
+    - compiler: clang
+      os: osx
+
 script:
     - "scripts/build.sh"
