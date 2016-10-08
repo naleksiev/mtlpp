@@ -7,3 +7,6 @@ matrix:
 
 script:
     - "scripts/build.sh"
+
+osx_image: xcode8
+
