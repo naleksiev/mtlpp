@@ -239,7 +239,7 @@ namespace mtlpp
     Buffer Texture::GetBuffer() const
     {
         Validate();
-#if MTLPP_IS_AVAILABLE(10_11, 9_0)
+#if MTLPP_IS_AVAILABLE(10_12, 9_0)
         return ns::Handle{ (__bridge void*)[(__bridge id<MTLTexture>)m_ptr buffer] };
 #else
         return ns::Handle{ nullptr };
@@ -250,7 +250,7 @@ namespace mtlpp
     uint32_t Texture::GetBufferOffset() const
     {
         Validate();
-#if MTLPP_IS_AVAILABLE(10_11, 9_0)
+#if MTLPP_IS_AVAILABLE(10_12, 9_0)
         return uint32_t([(__bridge id<MTLTexture>)m_ptr bufferOffset]);
 #else
         return 0;
@@ -261,7 +261,7 @@ namespace mtlpp
     uint32_t Texture::GetBufferBytesPerRow() const
     {
         Validate();
-#if MTLPP_IS_AVAILABLE(10_11, 9_0)
+#if MTLPP_IS_AVAILABLE(10_12, 9_0)
         return uint32_t([(__bridge id<MTLTexture>)m_ptr bufferBytesPerRow]);
 #else
         return 0;
