@@ -1,7 +1,6 @@
-## mtlpp - C++ wrapper around Metal
-Complete wrapper around Metal (Apple's low-level graphics API).
+## mtlpp - C++ wrapper around Metal [![Build Status](https://travis-ci.org/naleksiev/mtlpp.svg?branch=master)](https://travis-ci.org/naleksiev/mtlpp)
 
-[![Build Status](https://travis-ci.org/naleksiev/mtlpp.svg?branch=master)](https://travis-ci.org/naleksiev/mtlpp)
+Complete wrapper around Metal (Apple's low-level graphics API).
 
 ```c++
 #include "mtlpp.hpp"
