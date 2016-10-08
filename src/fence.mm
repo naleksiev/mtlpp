@@ -4,7 +4,9 @@
  */
 
 #include "fence.hpp"
-#include <Metal/MTLFence.h>
+#if MTLPP_IS_AVAILABLE_IOS(10_0)
+#   include <Metal/MTLFence.h>
+#endif
 
 namespace mtlpp
 {

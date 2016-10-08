@@ -4,7 +4,9 @@
  */
 
 #include "heap.hpp"
-#include <Metal/MTLHeap.h>
+#if MTLPP_IS_AVAILABLE_IOS(10_0)
+#   include <Metal/MTLHeap.h>
+#endif
 
 namespace mtlpp
 {

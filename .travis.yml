@@ -1,12 +1,15 @@
 language: cpp
 
 matrix:
-  include:
-    - compiler: clang
-      os: osx
+    include:
+        - compiler: clang
+          os: osx
 
 script:
     - "scripts/build.sh"
 
 osx_image: xcode8
+
+notifications:
+    email: false
 

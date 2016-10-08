@@ -1500,7 +1500,9 @@ namespace mtlpp
  */
 
 // #include "fence.hpp"
-#include <Metal/MTLFence.h>
+#if MTLPP_IS_AVAILABLE_IOS(10_0)
+#   include <Metal/MTLFence.h>
+#endif
 
 namespace mtlpp
 {
@@ -1542,37 +1544,51 @@ namespace mtlpp
  */
 
 // #include "function_constant_values.hpp"
-#include <Metal/MTLFunctionConstantValues.h>
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
+#   include <Metal/MTLFunctionConstantValues.h>
+#endif
 
 namespace mtlpp
 {
     FunctionConstantValues::FunctionConstantValues() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstantValues alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     void FunctionConstantValues::SetConstantValue(const void* value, DataType type, uint32_t index)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLFunctionConstantValues*)m_ptr setConstantValue:value type:MTLDataType(type) atIndex:index];
+#endif
     }
 
     void FunctionConstantValues::SetConstantValue(const void* value, DataType type, const ns::String& name)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLFunctionConstantValues*)m_ptr setConstantValue:value type:MTLDataType(type) withName:(__bridge NSString*)name.GetPtr()];
+#endif
     }
 
     void FunctionConstantValues::SetConstantValues(const void* value, DataType type, const ns::Range& range)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLFunctionConstantValues*)m_ptr setConstantValues:value type:MTLDataType(type) withRange:NSMakeRange(range.Location, range.Length)];
+#endif
     }
 
     void FunctionConstantValues::Reset()
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return [(__bridge MTLFunctionConstantValues*)m_ptr reset];
+#endif
     }
 }
 
@@ -1585,7 +1601,9 @@ namespace mtlpp
  */
 
 // #include "heap.hpp"
-#include <Metal/MTLHeap.h>
+#if MTLPP_IS_AVAILABLE_IOS(10_0)
+#   include <Metal/MTLHeap.h>
+#endif
 
 namespace mtlpp
 {
@@ -3796,136 +3814,189 @@ namespace mtlpp
  */
 
 // #include "stage_input_output_descriptor.hpp"
-#include <Metal/MTLStageInputOutputDescriptor.h>
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
+#   include <Metal/MTLStageInputOutputDescriptor.h>
+#endif
 
 namespace mtlpp
 {
     BufferLayoutDescriptor::BufferLayoutDescriptor() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLBufferLayoutDescriptor alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     uint32_t BufferLayoutDescriptor::GetStride() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stride]);
+#endif
     }
 
     StepFunction BufferLayoutDescriptor::GetStepFunction() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return StepFunction([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepFunction]);
+#endif
     }
 
     uint32_t BufferLayoutDescriptor::GetStepRate() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLBufferLayoutDescriptor*)m_ptr stepRate]);
+#endif
     }
 
     void BufferLayoutDescriptor::SetStride(uint32_t stride)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLBufferLayoutDescriptor*)m_ptr setStride:stride];
+#endif
     }
 
     void BufferLayoutDescriptor::SetStepFunction(StepFunction stepFunction)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLBufferLayoutDescriptor*)m_ptr setStepFunction:MTLStepFunction(stepFunction)];
+#endif
     }
 
     void BufferLayoutDescriptor::SetStepRate(uint32_t stepRate)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLBufferLayoutDescriptor*)m_ptr setStepRate:stepRate];
+#endif
     }
 
     AttributeDescriptor::AttributeDescriptor() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLAttributeDescriptor alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     AttributeFormat AttributeDescriptor::GetFormat() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return AttributeFormat([(__bridge MTLAttributeDescriptor*)m_ptr format]);
+#endif
     }
 
     uint32_t AttributeDescriptor::GetOffset() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr offset]);
+#endif
     }
 
     uint32_t AttributeDescriptor::GetBufferIndex() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLAttributeDescriptor*)m_ptr bufferIndex]);
+#endif
     }
 
     void AttributeDescriptor::SetFormat(AttributeFormat format)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLAttributeDescriptor*)m_ptr setFormat:MTLAttributeFormat(format)];
+#endif
     }
 
     void AttributeDescriptor::SetOffset(uint32_t offset)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLAttributeDescriptor*)m_ptr setOffset:offset];
+#endif
     }
 
     void AttributeDescriptor::SetBufferIndex(uint32_t bufferIndex)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLAttributeDescriptor*)m_ptr setBufferIndex:bufferIndex];
+#endif
     }
 
     StageInputOutputDescriptor::StageInputOutputDescriptor() :
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         ns::Object(ns::Handle{ (__bridge void*)[[MTLStageInputOutputDescriptor alloc] init] })
+#else
+        ns::Object(ns::Handle{ nullptr })
+#endif
     {
     }
 
     ns::Array<BufferLayoutDescriptor> StageInputOutputDescriptor::GetLayouts() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr layouts] };
+#endif
     }
 
     ns::Array<AttributeDescriptor> StageInputOutputDescriptor::GetAttributes() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return ns::Handle{ (__bridge void*)[(__bridge MTLStageInputOutputDescriptor*)m_ptr attributes] };
+#endif
     }
 
     IndexType StageInputOutputDescriptor::GetIndexType() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return IndexType([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexType]);
+#endif
     }
 
     uint32_t StageInputOutputDescriptor::GetIndexBufferIndex() const
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         return uint32_t([(__bridge MTLStageInputOutputDescriptor*)m_ptr indexBufferIndex]);
+#endif
     }
 
     void StageInputOutputDescriptor::SetIndexType(IndexType indexType)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLStageInputOutputDescriptor*)m_ptr setIndexType:MTLIndexType(indexType)];
+#endif
     }
 
     void StageInputOutputDescriptor::SetIndexBufferIndex(uint32_t indexBufferIndex)
     {
         Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
         [(__bridge MTLStageInputOutputDescriptor*)m_ptr setIndexBufferIndex:indexBufferIndex];
+#endif
     }
 
     void StageInputOutputDescriptor::Reset()
     {
-
+        Validate();
+#if MTLPP_IS_AVAILABLE(10_12, 10_0)
+        [(__bridge MTLStageInputOutputDescriptor*)m_ptr reset];
+#endif
     }
 }
 
