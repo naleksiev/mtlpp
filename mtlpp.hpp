@@ -698,9 +698,9 @@ namespace mtlpp
         Texture      GetParentTexture() const MTLPP_AVAILABLE(10_11, 9_0);
         uint32_t     GetParentRelativeLevel() const MTLPP_AVAILABLE(10_11, 9_0);
         uint32_t     GetParentRelativeSlice() const MTLPP_AVAILABLE(10_11, 9_0);
-        Buffer       GetBuffer() const MTLPP_AVAILABLE(10_11, 9_0);
-        uint32_t     GetBufferOffset() const MTLPP_AVAILABLE(10_11, 9_0);
-        uint32_t     GetBufferBytesPerRow() const MTLPP_AVAILABLE(10_11, 9_0);
+        Buffer       GetBuffer() const MTLPP_AVAILABLE(10_12, 9_0);
+        uint32_t     GetBufferOffset() const MTLPP_AVAILABLE(10_12, 9_0);
+        uint32_t     GetBufferBytesPerRow() const MTLPP_AVAILABLE(10_12, 9_0);
         //IOSurfaceRef GetIOSurface() const;
         uint32_t     GetIOSurfacePlane() const MTLPP_AVAILABLE_MAC(10_11);
         TextureType  GetTextureType() const;
