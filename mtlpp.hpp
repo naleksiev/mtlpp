@@ -2675,6 +2675,11 @@ namespace mtlpp
 //////////////////////////////////////
 // FILE: mtlpp.hpp
 //////////////////////////////////////
+/*
+ * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
+ */
+
 // #pragma once
 
 // #include "defines.hpp"
