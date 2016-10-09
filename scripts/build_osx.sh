@@ -25,18 +25,3 @@ build_mac 10.10
 build_mac 10.11
 build_mac 10.12
 
-build_ios 7.0 armv7
-build_ios 8.0 armv7
-build_ios 9.0 armv7
-build_ios 10.0 armv7
-
-build_ios 7.0 armv7s
-build_ios 8.0 armv7s
-build_ios 9.0 armv7s
-build_ios 10.0 armv7s
-
-build_ios 7.0 arm64
-build_ios 8.0 arm64
-build_ios 9.0 arm64
-build_ios 10.0 arm64
-
