@@ -3,10 +3,13 @@ language: cpp
 matrix:
     include:
         - compiler: clang
-          os: osx
+          os: macos
+    include:
+        - compiler: clang
+          os: ios
 
 script:
-    - "scripts/build.sh"
+    - "scripts/build_${TRAVIS_OS_NAME}.sh"
 
 notifications:
     email: false
