@@ -12,9 +12,11 @@ build_mac()
 
     clang++ -std=c++11 -mmacosx-version-min=$ver examples/00_init.cpp .build/macos_$ver/mtlpp.o -o .build/macos_$ver/00_init -framework Metal -framework CoreFoundation -fobjc-link-runtime
     clang++ -std=c++11 -mmacosx-version-min=$ver examples/01_clear.cpp .build/macos_$ver/mtlpp.o -o .build/macos_$ver/01_clear -framework Metal -framework CoreFoundation -fobjc-link-runtime
+    clang++ -std=c++11 -mmacosx-version-min=$ver examples/02_triangle.cpp .build/macos_$ver/mtlpp.o -o .build/macos_$ver/02_triangle-framework Metal -framework CoreFoundation -fobjc-link-runtime
 
 #    .build/macos_$ver/00_init
 #    .build/macos_$ver/01_clear
+#    .build/macos_$ver/02_triangle
 }
 
 build_mac 10.9
