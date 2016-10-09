@@ -3,7 +3,7 @@ language: cpp
 matrix:
     include:
         - compiler: clang
-          os: macos
+          os: osx
 #    include:
 #        - compiler: clang
 #          os: ios
