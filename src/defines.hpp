@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <cstdint>
-#include <cassert>
+#include <stdint.h>
+#include <assert.h>
 #include <functional>
 
 #ifndef __has_feature
