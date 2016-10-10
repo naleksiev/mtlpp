@@ -22,3 +22,9 @@ int main()
     return 0;
 }
 ```
+
+### Main features
+ * Complete API wrapper (iOS 10, tvOS 10, and OS X 10.12).
+ * Objective-C free headers - allow compiling agains the Metal API on any platform (**no linking**).
+ * Configurable AVAILABILITY and DEPRECATED validation.
+ * Amalgamated ```mtlpp.hpp``` and ```mtlpp.mm``` - of course you can still use the content of ```src/``` folder.
