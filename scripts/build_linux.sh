@@ -16,6 +16,6 @@ build_linux()
     clang++ $cflags ../examples/02_triangle.cpp -o $output/02_triangle.o
 }
 
-build_linux 32
+#build_linux 32
 build_linux 64
 
