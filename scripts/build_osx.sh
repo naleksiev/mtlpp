@@ -6,18 +6,18 @@ build_mac()
 {
     local ver=$1
     local output="../.build/macos_$ver"
-    local objc_flags="-std=c++11 -x objective-c++ -mmacosx-version-min=$ver"
-    local cpp_flags="-std=c++11 -mmacosx-version-min=$ver"
-    local ld_flags="-framework Metal -framework CoreFoundation -fobjc-link-runtime"
+    local objcflags="-std=c++11 -x objective-c++ -mmacosx-version-min=$ver"
+    local cppflags="-std=c++11 -mmacosx-version-min=$ver"
+    local ldflags="-framework Metal -framework CoreFoundation -fobjc-link-runtime"
 
     rm -Rf $output
     mkdir -p $output
 
-    clang++ $objc_flags -c ../mtlpp.mm -o $output/mtlpp.o
+    clang++ $objcflags -c ../mtlpp.mm -o $output/mtlpp.o
 
-    clang++ $cpp_flags $ld_flags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
-    clang++ $cpp_flags $ld_flags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
-    clang++ $cpp_flags $ld_flags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cppflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
+    clang++ $cppflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
+    clang++ $cppflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
 }
 
 build_mac 10.9

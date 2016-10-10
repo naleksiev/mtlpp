@@ -7,6 +7,8 @@ matrix:
 #    include:
 #        - compiler: clang
 #          os: ios
+        - compiler: clang
+          os: linux
 
 script:
     - "scripts/build_${TRAVIS_OS_NAME}.sh"
