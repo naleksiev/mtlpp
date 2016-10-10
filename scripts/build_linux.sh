@@ -6,7 +6,7 @@ build_linux()
 {
     local ver=$1
     local output="../.build/linux_$ver"
-    local cflags="-std=c++11 -stdlib=c++ -c -m$ver"
+    local cflags="-std=c++11 -c -m$ver"
 
     rm -Rf $output
     mkdir -p $output
