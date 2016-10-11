@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
 input_hpp=mtlpp.hpp
 output_hpp=../mtlpp.hpp
 input_mm=*.mm
