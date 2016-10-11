@@ -4,9 +4,9 @@ matrix:
     include:
         - compiler: clang
           os: osx
-    include:
         - compiler: clang
           os: ios
+          osx_image: xcode8
         - compiler: clang
           os: linux
 
