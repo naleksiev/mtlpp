@@ -1137,6 +1137,15 @@ namespace mtlpp
         return ns::Handle{ (__bridge void*)MTLCreateSystemDefaultDevice() };
     }
 
+    ns::Array<Device> Device::CopyAllDevices()
+    {
+#if MTLPP_IS_AVAILABLE_MAC(10_11)
+        return ns::Handle{ (__bridge void*)MTLCopyAllDevices() };
+#else
+        return ns::Handle{ nullptr };
+#endif
+    }
+
     ns::String Device::GetName() const
     {
         Validate();
@@ -1412,7 +1421,7 @@ namespace mtlpp
 #if MTLPP_IS_AVAILABLE(10_11, 9_0)
         NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
         MTLComputePipelineReflection* mtlReflection = outReflection ? (__bridge MTLComputePipelineReflection*)outReflection->GetPtr() : nullptr;
-        return ns::Handle{ 
+        return ns::Handle{
             (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
                                                                                          options:MTLPipelineOption(options)
                                                                                       reflection:&mtlReflection

@@ -84,6 +84,7 @@ namespace mtlpp
         Device(const ns::Handle& handle) : ns::Object(handle) { }
 
         static Device CreateSystemDefaultDevice() MTLPP_AVAILABLE(10_11, 8_0);
+        static ns::Array<Device> CopyAllDevices() MTLPP_AVAILABLE(10_11, NA);
 
         ns::String GetName() const;
         Size       GetMaxThreadsPerThreadgroup() const MTLPP_AVAILABLE(10_11, 9_0);
