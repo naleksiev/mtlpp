@@ -4,9 +4,12 @@ matrix:
     include:
         - compiler: clang
           os: osx
+          env: arch=x86_64
+
         - compiler: clang
-          os: ios
-          osx_image: xcode8
+          os: osx
+          env: arch=arm
+
         - compiler: clang
           os: linux
 
