@@ -4,11 +4,15 @@ matrix:
     include:
         - compiler: clang
           os: osx
-          env: arch=x86_64
+          env: arch=x86_64 platform=osx
 
         - compiler: clang
           os: osx
-          env: arch=arm
+          env: arch=arm platform=ios
+
+        - compiler: clang
+          os: osx
+          env: arch=arm platform=tvos
 
         - compiler: clang
           os: linux
