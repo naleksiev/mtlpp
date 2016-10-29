@@ -30,3 +30,16 @@ int main()
  * Objective-C free headers - allow compiling agains the Metal API on any platform (*no linking on platforms without Metal*).
  * Configurable AVAILABILITY and DEPRECATED validation.
  * Amalgamated ```mtlpp.hpp``` and ```mtlpp.mm``` - or use the contents of ```src/``` folder.
+
+
+### Interop
+ **mtlpp** uses Toll-Free Bridging. The example below demonstrates how ```MTKView``` (MetalKit) can interop with **mtlpp**. 
+ ```
+    MTKView * mtkView;
+    
+    // Objective-C to C++
+    mtlpp::Device device = ns::Handle{ (__bridge void*)mtkView.device };
+    
+    // C++ to Objective-C
+    mtkView.device = (__bridge id<MTLDevice>)device.GetPtr();
+```
