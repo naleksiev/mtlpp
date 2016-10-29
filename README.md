@@ -34,7 +34,7 @@ int main()
 
 ### Interop
  **mtlpp** uses Toll-Free Bridging. The example below demonstrates how ```MTKView``` (MetalKit) can interop with **mtlpp**. 
- ```
+ ```objective-c
     MTKView * mtkView;
     
     // Objective-C to C++
