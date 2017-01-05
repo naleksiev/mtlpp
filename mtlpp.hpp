@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -9,7 +9,7 @@
 // FILE: defines.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -83,7 +83,7 @@
 // FILE: ns.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -221,7 +221,7 @@ namespace ns
 // FILE: command_encoder.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -257,7 +257,7 @@ namespace mtlpp
 // FILE: pixel_format.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -434,7 +434,7 @@ namespace mtlpp
 // FILE: resource.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -517,7 +517,7 @@ namespace mtlpp
 // FILE: buffer.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -552,7 +552,7 @@ namespace mtlpp
 // FILE: types.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -614,7 +614,7 @@ namespace mtlpp
 // FILE: texture.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -728,7 +728,7 @@ namespace mtlpp
 // FILE: argument.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -911,7 +911,7 @@ namespace mtlpp
 // FILE: library.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1069,7 +1069,7 @@ namespace mtlpp
 // FILE: device.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1201,7 +1201,7 @@ namespace mtlpp
 // FILE: fence.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1231,7 +1231,7 @@ namespace mtlpp
 // FILE: blit_command_encoder.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1279,7 +1279,7 @@ namespace mtlpp
 // FILE: command_buffer.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1360,7 +1360,7 @@ namespace mtlpp
 // FILE: compute_command_encoder.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1406,7 +1406,7 @@ namespace mtlpp
 // FILE: command_queue.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1442,7 +1442,7 @@ namespace mtlpp
 // FILE: depth_stencil.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1538,7 +1538,7 @@ namespace mtlpp
 // FILE: drawable.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1566,7 +1566,7 @@ namespace mtlpp
 // FILE: render_pass.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1712,7 +1712,7 @@ namespace mtlpp
 // FILE: stage_input_output_descriptor.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1863,7 +1863,7 @@ namespace mtlpp
 // FILE: compute_pipeline.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -1923,7 +1923,7 @@ namespace mtlpp
 // FILE: render_command_encoder.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2116,7 +2116,7 @@ namespace mtlpp
 // FILE: function_constant_values.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2147,7 +2147,7 @@ namespace mtlpp
 // FILE: render_pipeline.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2356,7 +2356,7 @@ namespace mtlpp
 // FILE: vertex_descriptor.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2487,7 +2487,7 @@ namespace mtlpp
 // FILE: parallel_render_command_encoder.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2522,7 +2522,7 @@ namespace mtlpp
 // FILE: sampler.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2620,7 +2620,7 @@ namespace mtlpp
 // FILE: heap.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
@@ -2677,7 +2677,7 @@ namespace mtlpp
 // FILE: mtlpp.hpp
 //////////////////////////////////////
 /*
- * Copyright 2016 Nikolay Aleksiev. All rights reserved.
+ * Copyright 2016-2017 Nikolay Aleksiev. All rights reserved.
  * License: https://github.com/naleksiev/mtlpp/blob/master/LICENSE
  */
 
