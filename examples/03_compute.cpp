@@ -27,36 +27,50 @@ int main()
     mtlpp::ComputePipelineState computePipelineState = device.NewComputePipelineState(sqrFunc, nullptr);
     assert(computePipelineState);
 
-    const uint32_t inDataCount = 8;
-    const float inData[inDataCount] = { 0.0f, 1.0f, 2.0f, 10.0f, 11.0f, 12.0f, 20, 21 };
+    const uint32_t dataCount = 6;
 
-    mtlpp::Buffer inBuffer = device.NewBuffer(inData, sizeof(inData), mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
+    mtlpp::Buffer inBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
     assert(inBuffer);
 
-    mtlpp::Buffer outBuffer = device.NewBuffer(sizeof(inData), mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
+    mtlpp::Buffer outBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
     assert(outBuffer);
 
-    mtlpp::CommandQueue commandQueue = device.NewCommandQueue();
-    assert(commandQueue);
-    mtlpp::CommandBuffer commandBuffer = commandQueue.CommandBuffer();
-    assert(commandBuffer);
+    for (uint32_t i=0; i<4; i++)
+    {
+        // update input data
+        {
+            float* inData = static_cast<float*>(inBuffer.GetContents());
+            for (uint32_t j=0; j<dataCount; j++)
+                inData[j] = 10 * i + j;
+            inBuffer.DidModify(ns::Range(0, sizeof(float) * dataCount));
+        }
 
-    mtlpp::ComputeCommandEncoder commandEncoder = commandBuffer.ComputeCommandEncoder();
-    commandEncoder.SetBuffer(inBuffer, 0, 0);
-    commandEncoder.SetBuffer(outBuffer, 0, 1);
-    commandEncoder.SetComputePipelineState(computePipelineState);
+        mtlpp::CommandQueue commandQueue = device.NewCommandQueue();
+        assert(commandQueue);
+        mtlpp::CommandBuffer commandBuffer = commandQueue.CommandBuffer();
+        assert(commandBuffer);
 
-    commandEncoder.DispatchThreadgroups(
-        mtlpp::Size(1, 1, 1),
-        mtlpp::Size(inDataCount, 1, 1));
+        mtlpp::ComputeCommandEncoder commandEncoder = commandBuffer.ComputeCommandEncoder();
+        commandEncoder.SetBuffer(inBuffer, 0, 0);
+        commandEncoder.SetBuffer(outBuffer, 0, 1);
+        commandEncoder.SetComputePipelineState(computePipelineState);
 
-    commandEncoder.EndEncoding();
-    commandBuffer.Commit();
-    commandBuffer.WaitUntilCompleted();
+        commandEncoder.DispatchThreadgroups(
+            mtlpp::Size(1, 1, 1),
+            mtlpp::Size(dataCount, 1, 1));
 
-    float* outData = static_cast<float*>(outBuffer.GetContents());
-    for (uint32_t i=0; i<inDataCount; i++)
-        printf("sqr(%g) = %g\n", inData[i], outData[i]);
+        commandEncoder.EndEncoding();
+        commandBuffer.Commit();
+        commandBuffer.WaitUntilCompleted();
+
+        // read the data
+        {
+            float* inData = static_cast<float*>(inBuffer.GetContents());
+            float* outData = static_cast<float*>(outBuffer.GetContents());
+            for (uint32_t j=0; j<dataCount; j++)
+                printf("sqr(%g) = %g\n", inData[j], outData[j]);
+        }
+    }
 
     return 0;
 }
