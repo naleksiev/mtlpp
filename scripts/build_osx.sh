@@ -18,6 +18,7 @@ build_mac()
     clang++ $cppflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
     clang++ $cppflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
     clang++ $cppflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cppflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/03_compute
 }
 
 build_ios()
@@ -38,6 +39,7 @@ build_ios()
     clang++ $cflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
     clang++ $cflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
     clang++ $cflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
 }
 
 build_tvos()
@@ -58,6 +60,7 @@ build_tvos()
     clang++ $cflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
     clang++ $cflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
     clang++ $cflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
 }
 
 if [[ "$arch" == "arm" ]]; then

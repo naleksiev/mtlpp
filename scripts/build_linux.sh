@@ -14,6 +14,7 @@ build_linux()
     clang++ $cflags ../examples/00_init.cpp -o $output/00_init.o
     clang++ $cflags ../examples/01_clear.cpp -o $output/01_clear.o
     clang++ $cflags ../examples/02_triangle.cpp -o $output/02_triangle.o
+    clang++ $cflags ../examples/03_compute.cpp -o $output/03_compute.o
 }
 
 #build_linux 32
