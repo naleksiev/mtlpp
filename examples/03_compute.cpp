@@ -27,6 +27,9 @@ int main()
     mtlpp::ComputePipelineState computePipelineState = device.NewComputePipelineState(sqrFunc, nullptr);
     assert(computePipelineState);
 
+    mtlpp::CommandQueue commandQueue = device.NewCommandQueue();
+    assert(commandQueue);
+
     const uint32_t dataCount = 6;
 
     mtlpp::Buffer inBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
@@ -45,8 +48,6 @@ int main()
             inBuffer.DidModify(ns::Range(0, sizeof(float) * dataCount));
         }
 
-        mtlpp::CommandQueue commandQueue = device.NewCommandQueue();
-        assert(commandQueue);
         mtlpp::CommandBuffer commandBuffer = commandQueue.CommandBuffer();
         assert(commandBuffer);
 
