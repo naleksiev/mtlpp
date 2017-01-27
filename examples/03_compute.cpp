@@ -32,10 +32,10 @@ int main()
 
     const uint32_t dataCount = 6;
 
-    mtlpp::Buffer inBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
+    mtlpp::Buffer inBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::StorageModeManaged);
     assert(inBuffer);
 
-    mtlpp::Buffer outBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::CpuCacheModeDefaultCache);
+    mtlpp::Buffer outBuffer = device.NewBuffer(sizeof(float) * dataCount, mtlpp::ResourceOptions::StorageModeManaged);
     assert(outBuffer);
 
     for (uint32_t i=0; i<4; i++)
@@ -55,12 +55,15 @@ int main()
         commandEncoder.SetBuffer(inBuffer, 0, 0);
         commandEncoder.SetBuffer(outBuffer, 0, 1);
         commandEncoder.SetComputePipelineState(computePipelineState);
-
         commandEncoder.DispatchThreadgroups(
             mtlpp::Size(1, 1, 1),
             mtlpp::Size(dataCount, 1, 1));
-
         commandEncoder.EndEncoding();
+
+        mtlpp::BlitCommandEncoder blitCommandEncoder = commandBuffer.BlitCommandEncoder();
+        blitCommandEncoder.Synchronize(outBuffer);
+        blitCommandEncoder.EndEncoding();
+
         commandBuffer.Commit();
         commandBuffer.WaitUntilCompleted();
 

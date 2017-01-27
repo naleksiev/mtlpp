@@ -26,10 +26,14 @@ int main()
     colorAttachmentDesc.SetStoreAction(mtlpp::StoreAction::Store);
     colorAttachmentDesc.SetClearColor(mtlpp::ClearColor(1.0, 0.0, 0.0, 0.0));
     renderPassDesc.SetRenderTargetArrayLength(1);
+
     mtlpp::RenderCommandEncoder renderCommandEncoder = commandBuffer.RenderCommandEncoder(renderPassDesc);
     assert(renderCommandEncoder);
-
     renderCommandEncoder.EndEncoding();
+
+    mtlpp::BlitCommandEncoder blitCommandEncoder = commandBuffer.BlitCommandEncoder();
+    blitCommandEncoder.Synchronize(texture, 0, 0);
+    blitCommandEncoder.EndEncoding();
 
     commandBuffer.Commit();
     commandBuffer.WaitUntilCompleted();
