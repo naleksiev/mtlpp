@@ -31,7 +31,7 @@ build_ios()
     local output="../.build/ios_${ver}_${arch}"
     local sdk="--sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
     local objcflags="-std=c++11 -x objective-c++ -miphoneos-version-min=$ver $sdk -arch $arch"
-    local cflags="-std=c++11 -miphoneos-version-min=$ver $sdk -arch $arch"
+    local cppflags="-std=c++11 -miphoneos-version-min=$ver $sdk -arch $arch"
     local ldflags="-framework Metal -framework CoreFoundation -fobjc-link-runtime"
 
     rm -Rf $output
@@ -39,10 +39,10 @@ build_ios()
 
     clang++ $objcflags -c ../mtlpp.mm -o $output/mtlpp.o
 
-    clang++ $cflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
-    clang++ $cflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
-    clang++ $cflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
-    clang++ $cflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
+    clang++ $cppflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
+    clang++ $cppflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
+    clang++ $cppflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cppflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
 }
 
 build_tvos()
@@ -52,7 +52,7 @@ build_tvos()
     local output="../.build/tvos_${ver}_${arch}"
     local sdk="--sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS.sdk"
     local objcflags="-std=c++11 -x objective-c++ -mtvos-version-min=$ver $sdk -arch $arch"
-    local cflags="-std=c++11 -mtvos-version-min=$ver $sdk -arch $arch"
+    local cppflags="-std=c++11 -mtvos-version-min=$ver $sdk -arch $arch"
     local ldflags="-framework Metal -framework CoreFoundation -fobjc-link-runtime"
 
     rm -Rf $output
@@ -60,10 +60,10 @@ build_tvos()
 
     clang++ $objcflags -c ../mtlpp.mm -o $output/mtlpp.o
 
-    clang++ $cflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
-    clang++ $cflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
-    clang++ $cflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
-    clang++ $cflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
+    clang++ $cppflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
+    clang++ $cppflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
+    clang++ $cppflags $ldflags ../examples/02_triangle.cpp $output/mtlpp.o -o $output/02_triangle
+    clang++ $cppflags $ldflags ../examples/03_compute.cpp $output/mtlpp.o -o $output/02_compute
 }
 
 if [[ "$arch" == "arm" ]]; then
