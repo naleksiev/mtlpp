@@ -8,9 +8,6 @@ mtlpp::RenderPipelineState g_renderPipelineState;
 
 void Render(const Window& win)
 {
-    uint32_t width = win.GetWidth();
-    uint32_t height = win.GetHeight();
-
     mtlpp::CommandBuffer commandBuffer = g_commandQueue.CommandBuffer();
 
     mtlpp::RenderPassDescriptor renderPassDesc = win.GetRenderPassDescriptor();
