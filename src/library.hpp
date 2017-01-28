@@ -76,6 +76,7 @@ namespace mtlpp
     class Function : public ns::Object
     {
     public:
+        Function() { }
         Function(const ns::Handle& handle) : ns::Object(handle) { }
 
         ns::String                                   GetLabel() const MTLPP_AVAILABLE(10_12, 10_0);
