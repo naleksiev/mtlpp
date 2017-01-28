@@ -25,9 +25,13 @@ Window::Window(const mtlpp::Device& device, void (*render)(const Window&), int32
 {
     NSRect frame = NSMakeRect(0, 0, width, height);
     NSWindow* window = [[NSWindow alloc] initWithContentRect:frame
-                                          styleMask:(NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable)
-                                          backing:NSBackingStoreBuffered
-                                          defer:NO];
+#if MTLPP_IS_AVAILABLE_MAC(10_12)
+        styleMask:(NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable)
+#else
+        styleMask:(NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask)
+#endif
+        backing:NSBackingStoreBuffered
+        defer:NO];
     window.title = [[NSProcessInfo processInfo] processName];
     WindowViewController* viewController = [WindowViewController new];
     viewController->m_render = render;
