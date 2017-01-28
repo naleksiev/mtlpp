@@ -28,6 +28,7 @@ Window::Window(const mtlpp::Device& device, void (*render)(const Window&), int32
                                           styleMask:(NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable)
                                           backing:NSBackingStoreBuffered
                                           defer:NO];
+    window.title = [[NSProcessInfo processInfo] processName];
     WindowViewController* viewController = [WindowViewController new];
     viewController->m_render = render;
     viewController->m_window = this;
@@ -42,6 +43,7 @@ Window::Window(const mtlpp::Device& device, void (*render)(const Window&), int32
     [window orderFrontRegardless];
 
     m_view = ns::Handle{ (__bridge void*)view };
+
 }
 
 uint32_t Window::GetWidth() const
@@ -66,6 +68,19 @@ mtlpp::RenderPassDescriptor Window::GetRenderPassDescriptor() const
 
 void Window::Run()
 {
+    NSApplication * application = [NSApplication sharedApplication];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+
+    NSMenu* menubar = [NSMenu new];
+    NSMenuItem* appMenuItem = [NSMenuItem new];
+    NSMenu* appMenu = [NSMenu new];
+    NSMenuItem* quitMenuItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(stop:) keyEquivalent:@"q"];
+    [menubar addItem:appMenuItem];
+    [appMenu addItem:quitMenuItem];
+    [appMenuItem setSubmenu:appMenu];
+    [NSApp setMainMenu:menubar];
+
+    [NSApp activateIgnoringOtherApps:YES];
     [NSApp run];
 }
 
