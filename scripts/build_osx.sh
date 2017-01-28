@@ -15,7 +15,7 @@ build_mac()
 
     clang++ $objcflags -c ../mtlpp.mm -o $output/mtlpp.o
 
-    clang++ $objcflags -c ../examples/window.mm -o $output/window.o
+    clang++ $objcflags -c ../examples/window_macos.mm -o $output/window.o
 
     clang++ $cppflags $ldflags ../examples/00_init.cpp $output/mtlpp.o -o $output/00_init
     clang++ $cppflags $ldflags ../examples/01_clear.cpp $output/mtlpp.o -o $output/01_clear
