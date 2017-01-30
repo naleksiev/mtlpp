@@ -9,7 +9,7 @@ mtlpp::RenderPipelineState g_renderPipelineState;
 void Render(const Window& win)
 {
     mtlpp::CommandBuffer commandBuffer = g_commandQueue.CommandBuffer();
-
+    
     mtlpp::RenderPassDescriptor renderPassDesc = win.GetRenderPassDescriptor();
     if (renderPassDesc)
     {
@@ -31,16 +31,16 @@ int main()
         #include <metal_stdlib>
         using namespace metal;
 
-        vertex float4 vertFunc (
+        vertex float4 vertFunc(
             const device packed_float3* vertexArray [[buffer(0)]],
             unsigned int vID[[vertex_id]])
         {
             return float4(vertexArray[vID], 1.0);
         }
 
-        fragment half4 fragFunc ()
+        fragment half4 fragFunc()
         {
-            return half4(1.0);
+            return half4(1.0, 0.0, 0.0, 1.0);
         }
     )""";
 
@@ -62,7 +62,7 @@ int main()
     mtlpp::RenderPipelineDescriptor renderPipelineDesc;
     renderPipelineDesc.SetVertexFunction(vertFunc);
     renderPipelineDesc.SetFragmentFunction(fragFunc);
-    renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::RGBA8Unorm);
+    renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::BGRA8Unorm);
     g_renderPipelineState = g_device.NewRenderPipelineState(renderPipelineDesc, nullptr);
 
     Window win(g_device, &Render, 320, 240);
