@@ -16,8 +16,13 @@ namespace mtlpp
         Drawable() { }
         Drawable(const ns::Handle& handle) : ns::Object(handle) { }
 
+        double   GetPresentedTime() const MTLPP_AVAILABLE_IOS(10_3);
+        uint64_t GetDrawableID() const MTLPP_AVAILABLE_IOS(10_3);
+
         void Present();
-        void Present(double presentationTime);
+        void PresentAtTime(double presentationTime);
+        void PresentAfterMinimumDuration(double duration) MTLPP_AVAILABLE_IOS(10_3);
+        void AddPresentedHandler(std::function<void(const Drawable&)> handler) MTLPP_AVAILABLE_IOS(10_3);
     }
     MTLPP_AVAILABLE(10_11, 8_0);
 }

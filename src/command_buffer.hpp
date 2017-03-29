@@ -57,6 +57,10 @@ namespace mtlpp
         ns::String          GetLabel() const;
         CommandBufferStatus GetStatus() const;
         ns::Error           GetError() const;
+        double              GetKernelStartTime() const MTLPP_AVAILABLE_IOS(10_3);
+        double              GetKernelEndTime() const MTLPP_AVAILABLE_IOS(10_3);
+        double              GetGpuStartTime() const MTLPP_AVAILABLE_IOS(10_3);
+        double              GetGpuEndTime() const MTLPP_AVAILABLE_IOS(10_3);
 
         void SetLabel(const ns::String& label);
 
@@ -65,7 +69,8 @@ namespace mtlpp
         void AddScheduledHandler(std::function<void(const CommandBuffer&)> handler);
         void AddCompletedHandler(std::function<void(const CommandBuffer&)> handler);
         void Present(const Drawable& drawable);
-        void Present(const Drawable& drawable, double presentationTime);
+        void PresentAtTime(const Drawable& drawable, double presentationTime);
+        void PresentAfterMinimumDuration(const Drawable& drawable, double duration) MTLPP_AVAILABLE_IOS(10_3);
         void WaitUntilScheduled();
         void WaitUntilCompleted();
         BlitCommandEncoder BlitCommandEncoder();

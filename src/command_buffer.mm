@@ -52,6 +52,46 @@ namespace mtlpp
         return ns::Handle{ (__bridge void*)[(__bridge id<MTLCommandBuffer>)m_ptr error] };
     }
 
+    double CommandBuffer::GetKernelStartTime() const
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_IOS(10_3)
+        return [(__bridge id<MTLCommandBuffer>)m_ptr kernelStartTime];
+#else
+        return 0.0;
+#endif
+    }
+
+    double CommandBuffer::GetKernelEndTime() const
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_IOS(10_3)
+        return [(__bridge id<MTLCommandBuffer>)m_ptr kernelEndTime];
+#else
+        return 0.0;
+#endif
+    }
+
+    double CommandBuffer::GetGpuStartTime() const
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_IOS(10_3)
+        return [(__bridge id<MTLCommandBuffer>)m_ptr GPUStartTime];
+#else
+        return 0.0;
+#endif
+    }
+
+    double CommandBuffer::GetGpuEndTime() const
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_IOS(10_3)
+        return [(__bridge id<MTLCommandBuffer>)m_ptr GPUEndTime];
+#else
+        return 0.0;
+#endif
+    }
+
     void CommandBuffer::SetLabel(const ns::String& label)
     {
         Validate();
@@ -94,10 +134,18 @@ namespace mtlpp
         [(__bridge id<MTLCommandBuffer>)m_ptr presentDrawable:(__bridge id<MTLDrawable>)drawable.GetPtr()];
     }
 
-    void CommandBuffer::Present(const Drawable& drawable, double presentationTime)
+    void CommandBuffer::PresentAtTime(const Drawable& drawable, double presentationTime)
     {
         Validate();
         [(__bridge id<MTLCommandBuffer>)m_ptr presentDrawable:(__bridge id<MTLDrawable>)drawable.GetPtr() atTime:presentationTime];
+    }
+
+    void CommandBuffer::PresentAfterMinimumDuration(const Drawable& drawable, double duration)
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_IOS(10_3)
+        [(__bridge id<MTLCommandBuffer>)m_ptr presentDrawable:(__bridge id<MTLDrawable>)drawable.GetPtr() afterMinimumDuration:duration];
+#endif
     }
 
     void CommandBuffer::WaitUntilScheduled()

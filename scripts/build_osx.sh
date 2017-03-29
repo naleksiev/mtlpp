@@ -72,16 +72,19 @@ if [[ "$arch" == "arm" ]]; then
         build_ios 8.0 armv7
         build_ios 9.0 armv7
         build_ios 10.0 armv7
+        build_ios 10.3 armv7
 
         build_ios 7.0 armv7s
         build_ios 8.0 armv7s
         build_ios 9.0 armv7s
         build_ios 10.0 armv7s
+        build_ios 10.3 armv7s
 
         build_ios 7.0 arm64
         build_ios 8.0 arm64
         build_ios 9.0 arm64
         build_ios 10.0 arm64
+        build_ios 10.3 arm64
     else
         build_tvos 9.0 arm64
         build_tvos 10.0 arm64
