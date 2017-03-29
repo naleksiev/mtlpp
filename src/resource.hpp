@@ -53,8 +53,8 @@ namespace mtlpp
 
         HazardTrackingModeUntracked MTLPP_AVAILABLE(NA, 10_0)   = 0x1 << ResourceHazardTrackingModeShift,
 
-        OptionCPUCacheModeDefault                               = CpuCacheModeDefaultCache,
-        OptionCPUCacheModeWriteCombined                         = CpuCacheModeWriteCombined,
+        OptionCpuCacheModeDefault                               = CpuCacheModeDefaultCache,
+        OptionCpuCacheModeWriteCombined                         = CpuCacheModeWriteCombined,
     }
     MTLPP_AVAILABLE(10_11, 8_0);
 
