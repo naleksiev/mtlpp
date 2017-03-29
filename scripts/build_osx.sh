@@ -88,6 +88,7 @@ if [[ "$arch" == "arm" ]]; then
     else
         build_tvos 9.0 arm64
         build_tvos 10.0 arm64
+        build_tvos 10.2 arm64
     fi
 else
     build_mac 10.9
