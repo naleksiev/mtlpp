@@ -2310,7 +2310,7 @@ namespace ns
     }
 #endif
 
-    const uint32_t ArrayBase::GetSize() const
+    uint32_t ArrayBase::GetSize() const
     {
         Validate();
         return uint32_t([(__bridge NSArray*)m_ptr count]);

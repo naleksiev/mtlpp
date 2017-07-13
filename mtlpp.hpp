@@ -149,7 +149,7 @@ namespace ns
         ArrayBase() { }
         ArrayBase(const Handle& handle) : Object(handle) { }
 
-        const uint32_t GetSize() const;
+        uint32_t GetSize() const;
 
     protected:
         void* GetItem(uint32_t index) const;
