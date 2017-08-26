@@ -1,32 +1,14 @@
 #include "../mtlpp.hpp"
 #include "window.hpp"
 
-mtlpp::Device              g_device;
-mtlpp::CommandQueue        g_commandQueue;
-mtlpp::Buffer              g_vertexBuffer;
-mtlpp::RenderPipelineState g_renderPipelineState;
+mtlpp::Device g_device;
 
 void Render(const Window& win)
 {
-    mtlpp::CommandBuffer commandBuffer = g_commandQueue.CommandBuffer();
+    mtlpp::CommandQueue        g_commandQueue;
+    mtlpp::Buffer              g_vertexBuffer;
+    mtlpp::RenderPipelineState g_renderPipelineState;
     
-    mtlpp::RenderPassDescriptor renderPassDesc = win.GetRenderPassDescriptor();
-    if (renderPassDesc)
-    {
-        mtlpp::RenderCommandEncoder renderCommandEncoder = commandBuffer.RenderCommandEncoder(renderPassDesc);
-        renderCommandEncoder.SetRenderPipelineState(g_renderPipelineState);
-        renderCommandEncoder.SetVertexBuffer(g_vertexBuffer, 0, 0);
-        renderCommandEncoder.Draw(mtlpp::PrimitiveType::Triangle, 0, 3);
-        renderCommandEncoder.EndEncoding();
-        commandBuffer.Present(win.GetDrawable());
-    }
-
-    commandBuffer.Commit();
-    commandBuffer.WaitUntilCompleted();
-}
-
-int main()
-{
     const char shadersSrc[] = R"""(
         #include <metal_stdlib>
         using namespace metal;
@@ -63,11 +45,43 @@ int main()
     renderPipelineDesc.SetVertexFunction(vertFunc);
     renderPipelineDesc.SetFragmentFunction(fragFunc);
     renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::BGRA8Unorm);
+
     g_renderPipelineState = g_device.NewRenderPipelineState(renderPipelineDesc, nullptr);
 
+    mtlpp::CommandBuffer commandBuffer = g_commandQueue.CommandBuffer();
+    
+    mtlpp::RenderPassDescriptor renderPassDesc = win.GetRenderPassDescriptor();
+    if (renderPassDesc)
+    {
+        static int frameCounter = 0;
+        if (frameCounter <= 59) {
+            renderPassDesc.GetColorAttachments()[0].SetClearColor(mtlpp::ClearColor(0.0, 1.0, 0.0, 1.0));
+            frameCounter++;
+        } else {
+            renderPassDesc.GetColorAttachments()[0].SetClearColor(mtlpp::ClearColor(0.0, 0.0, 1.0, 1.0));
+            if (frameCounter == 119) {
+                frameCounter = 0;
+            } else {
+                frameCounter++;
+            }
+        }    
+        mtlpp::RenderCommandEncoder renderCommandEncoder = commandBuffer.RenderCommandEncoder(renderPassDesc);
+        renderCommandEncoder.SetRenderPipelineState(g_renderPipelineState);
+        renderCommandEncoder.SetVertexBuffer(g_vertexBuffer, 0, 0);
+        renderCommandEncoder.Draw(mtlpp::PrimitiveType::Triangle, 0, 3);
+        renderCommandEncoder.EndEncoding();
+        commandBuffer.Present(win.GetDrawable());
+    }
+
+    commandBuffer.Commit();
+    commandBuffer.WaitUntilCompleted();
+}
+
+int main()
+{
+    g_device = mtlpp::Device::CreateSystemDefaultDevice();
     Window win(g_device, &Render, 320, 240);
     Window::Run();
-
     return 0;
 }
 
