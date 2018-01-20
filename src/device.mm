@@ -184,20 +184,40 @@ namespace mtlpp
     Library Device::NewLibrary(const ns::String& filepath, ns::Error* error)
     {
         Validate();
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newLibraryWithFile:(__bridge NSString*)filepath.GetPtr() error:&nsError] };
+
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        id<MTLLibrary> library = [(__bridge id<MTLDevice>)m_ptr newLibraryWithFile:(__bridge NSString*)filepath.GetPtr() error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }  
+
+        return ns::Handle{ (__bridge void*)library };
     }
 
     Library Device::NewLibrary(const char* source, const CompileOptions& options, ns::Error* error)
     {
         Validate();
         NSString* nsSource = [NSString stringWithUTF8String:source];
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newLibraryWithSource:nsSource
-                                                                        options:(__bridge MTLCompileOptions*)options.GetPtr()
-                                                                          error:&nsError]
-        };
+        
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        id<MTLLibrary> library = [(__bridge id<MTLDevice>)m_ptr newLibraryWithSource:nsSource
+                                                                             options:(__bridge MTLCompileOptions*)options.GetPtr()
+                                                                               error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }                            
+
+        return ns::Handle{ (__bridge void*)library };
     }
 
     void Device::NewLibrary(const char* source, const CompileOptions& options, std::function<void(const Library&, const ns::Error&)> completionHandler)
@@ -216,24 +236,49 @@ namespace mtlpp
     RenderPipelineState Device::NewRenderPipelineState(const RenderPipelineDescriptor& descriptor, ns::Error* error)
     {
         Validate();
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
-                                                                                          error:&nsError]
-        };
+
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        id<MTLRenderPipelineState> renderPipelineState = [(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
+                                                                                                                       error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }
+
+        return ns::Handle{ (__bridge void*)renderPipelineState };
     }
 
     RenderPipelineState Device::NewRenderPipelineState(const RenderPipelineDescriptor& descriptor, PipelineOption options, RenderPipelineReflection* outReflection, ns::Error* error)
     {
         Validate();
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        MTLRenderPipelineReflection* mtlReflection = outReflection ? (__bridge MTLRenderPipelineReflection*)outReflection->GetPtr() : nullptr;
-        return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
-                                                                                        options:MTLPipelineOption(options)
-                                                                                     reflection:&mtlReflection
-                                                                                          error:&nsError]
-        };
+        
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        // Reflection
+        MTLRenderPipelineReflection* reflection = NULL;
+        MTLRenderPipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
+
+        id<MTLRenderPipelineState> renderPipelineState = [(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
+                                                                                                                     options:MTLPipelineOption(options)
+                                                                                                                  reflection:reflectionPtr
+                                                                                                                       error:nsErrorPtr];
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }
+
+        // Reflection update
+        if(outReflection && reflection){
+            *outReflection = ns::Handle{ (__bridge void*)reflection };
+        }
+
+        return ns::Handle{ (__bridge void*)renderPipelineState };
     }
 
     void Device::NewRenderPipelineState(const RenderPipelineDescriptor& descriptor, std::function<void(const RenderPipelineState&, const ns::Error&)> completionHandler)
@@ -265,11 +310,20 @@ namespace mtlpp
     ComputePipelineState Device::NewComputePipelineState(const Function& computeFunction, ns::Error* error)
     {
         Validate();
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithFunction:(__bridge id<MTLFunction>)computeFunction.GetPtr()
-                                                                                         error:&nsError]
-        };
+        
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        id<MTLComputePipelineState> state = [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithFunction:(__bridge id<MTLFunction>)computeFunction.GetPtr()
+                                                                                                         error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }
+
+        return ns::Handle{ (__bridge void*)state };
     }
 
     ComputePipelineState Device::NewComputePipelineState(const Function& computeFunction, PipelineOption options, ComputePipelineReflection& outReflection, ns::Error* error)
@@ -308,13 +362,30 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_11, 9_0)
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        MTLComputePipelineReflection* mtlReflection = outReflection ? (__bridge MTLComputePipelineReflection*)outReflection->GetPtr() : nullptr;
-        return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
-                                                                                         options:MTLPipelineOption(options)
-                                                                                      reflection:&mtlReflection
-                                                                                           error:&nsError] };
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        // Reflection
+        MTLComputePipelineReflection* reflection = NULL;
+        MTLComputePipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
+
+        id<MTLComputePipelineState> state = [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
+                                                                                                         options:MTLPipelineOption(options)
+                                                                                                      reflection:reflectionPtr
+                                                                                                           error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }
+
+        // Reflection update
+        if(outReflection && reflection){
+            *outReflection = ns::Handle{ (__bridge void*)reflection };
+        }
+
+        return ns::Handle{ (__bridge void*)state };
 #else
         return ns::Handle{ nullptr };
 #endif
