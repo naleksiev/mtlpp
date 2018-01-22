@@ -321,11 +321,20 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        NSError* nsError = error ? (__bridge NSError*)error->GetPtr() : nullptr;
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLLibrary>)m_ptr
-                                            newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
-                                            constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
-                                            error:&nsError] };
+        // Error
+        NSError* nsError = NULL;
+        NSError** nsErrorPtr = error ? &nsError : nullptr;
+
+        id<MTLFunction> function = [(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
+                                                                        constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
+                                                                                 error:nsErrorPtr];
+
+        // Error update
+        if (error && nsError){
+            *error = ns::Handle{ (__bridge void*)nsError };
+        }
+
+        return ns::Handle{ (__bridge void*)function };
 #else
         return ns::Handle{ nullptr };
 #endif
