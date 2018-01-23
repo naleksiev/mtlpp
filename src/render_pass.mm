@@ -10,7 +10,7 @@
 namespace mtlpp
 {
     RenderPassAttachmentDescriptor::RenderPassAttachmentDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPassAttachmentDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPassAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -135,7 +135,7 @@ namespace mtlpp
     }
 
     RenderPassColorAttachmentDescriptor::RenderPassColorAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassColorAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassColorAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -154,7 +154,7 @@ namespace mtlpp
     }
 
     RenderPassDepthAttachmentDescriptor::RenderPassDepthAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassDepthAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassDepthAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -189,7 +189,7 @@ namespace mtlpp
     }
 
     RenderPassStencilAttachmentDescriptor::RenderPassStencilAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassStencilAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassStencilAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -206,7 +206,7 @@ namespace mtlpp
     }
 
     RenderPassDescriptor::RenderPassDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPassDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPassDescriptor alloc] init] autorelease] })
     {
     }
 

@@ -18,7 +18,7 @@
 namespace mtlpp
 {
     StructMember::StructMember() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStructMember alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStructMember alloc] init] autorelease] })
     {
     }
 
@@ -105,7 +105,7 @@ namespace mtlpp
     }
 
     Argument::Argument() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLArgument alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLArgument alloc] init] autorelease] })
     {
     }
 
@@ -392,7 +392,7 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(8_0)
         MTLTextureDescriptor* mtlTextureDescriptor = (__bridge MTLTextureDescriptor*)descriptor.GetPtr();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLBuffer>)m_ptr newTextureWithDescriptor:mtlTextureDescriptor offset:offset bytesPerRow:bytesPerRow] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLBuffer>)m_ptr newTextureWithDescriptor:mtlTextureDescriptor offset:offset bytesPerRow:bytesPerRow] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -904,12 +904,12 @@ namespace mtlpp
 namespace mtlpp
 {
     ComputePipelineReflection::ComputePipelineReflection() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLComputePipelineReflection alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLComputePipelineReflection alloc] init] autorelease] })
     {
     }
 
     ComputePipelineDescriptor::ComputePipelineDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLComputePipelineDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLComputePipelineDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -1000,7 +1000,7 @@ namespace mtlpp
 namespace mtlpp
 {
     StencilDescriptor::StencilDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStencilDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStencilDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -1077,7 +1077,7 @@ namespace mtlpp
     }
 
     DepthStencilDescriptor::DepthStencilDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLDepthStencilDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLDepthStencilDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -1176,7 +1176,7 @@ namespace mtlpp
 namespace mtlpp
 {
     CompileOptions::CompileOptions() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLCompileOptions alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLCompileOptions alloc] init] autorelease] })
     {
     }
 
@@ -1253,13 +1253,13 @@ namespace mtlpp
     CommandQueue Device::NewCommandQueue()
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newCommandQueue] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newCommandQueue] autorelease] };
     }
 
     CommandQueue Device::NewCommandQueue(uint32_t maxCommandBufferCount)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newCommandQueueWithMaxCommandBufferCount:maxCommandBufferCount] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newCommandQueueWithMaxCommandBufferCount:maxCommandBufferCount] autorelease] };
     }
 
     SizeAndAlign Device::HeapTextureSizeAndAlign(const TextureDescriptor& desc)
@@ -1285,7 +1285,7 @@ namespace mtlpp
     Heap Device::NewHeap(const HeapDescriptor& descriptor)
     {
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newHeapWithDescriptor:(__bridge MTLHeapDescriptor*)descriptor.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newHeapWithDescriptor:(__bridge MTLHeapDescriptor*)descriptor.GetPtr()] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -1294,13 +1294,13 @@ namespace mtlpp
     Buffer Device::NewBuffer(uint32_t length, ResourceOptions options)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] autorelease] };
     }
 
     Buffer Device::NewBuffer(const void* pointer, uint32_t length, ResourceOptions options)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newBufferWithBytes:pointer length:length options:MTLResourceOptions(options)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newBufferWithBytes:pointer length:length options:MTLResourceOptions(options)] autorelease] };
     }
 
 
@@ -1308,36 +1308,36 @@ namespace mtlpp
     {
         Validate();
         return ns::Handle{
-            (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newBufferWithBytesNoCopy:pointer
+            (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newBufferWithBytesNoCopy:pointer
                                                                              length:length
                                                                             options:MTLResourceOptions(options)
-                                                                        deallocator:^(void* pointer, NSUInteger length) { deallocator(pointer, uint32_t(length)); }]
+                                                                        deallocator:^(void* pointer, NSUInteger length) { deallocator(pointer, uint32_t(length)); }] autorelease]
         };
     }
 
     DepthStencilState Device::NewDepthStencilState(const DepthStencilDescriptor& descriptor)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newDepthStencilStateWithDescriptor:(__bridge MTLDepthStencilDescriptor*)descriptor.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newDepthStencilStateWithDescriptor:(__bridge MTLDepthStencilDescriptor*)descriptor.GetPtr()] autorelease] };
     }
 
     Texture Device::NewTexture(const TextureDescriptor& descriptor)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)descriptor.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)descriptor.GetPtr()] autorelease] };
     }
 
     //- (id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor *)descriptor iosurface:(IOSurfaceRef)iosurface plane:(NSUInteger)plane NS_AVAILABLE_MAC(10_11);
     SamplerState Device::NewSamplerState(const SamplerDescriptor& descriptor)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newSamplerStateWithDescriptor:(__bridge MTLSamplerDescriptor*)descriptor.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newSamplerStateWithDescriptor:(__bridge MTLSamplerDescriptor*)descriptor.GetPtr()] autorelease] };
     }
 
     Library Device::NewDefaultLibrary()
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newDefaultLibrary] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newDefaultLibrary] autorelease] };
     }
 
     Library Device::NewLibrary(const ns::String& filepath, ns::Error* error)
@@ -1348,11 +1348,11 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<MTLLibrary> library = [(__bridge id<MTLDevice>)m_ptr newLibraryWithFile:(__bridge NSString*)filepath.GetPtr() error:nsErrorPtr];
+        id<MTLLibrary> library = [[(__bridge id<MTLDevice>)m_ptr newLibraryWithFile:(__bridge NSString*)filepath.GetPtr() error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }  
 
         return ns::Handle{ (__bridge void*)library };
@@ -1367,13 +1367,13 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<MTLLibrary> library = [(__bridge id<MTLDevice>)m_ptr newLibraryWithSource:nsSource
-                                                                             options:(__bridge MTLCompileOptions*)options.GetPtr()
-                                                                               error:nsErrorPtr];
+        id<MTLLibrary> library = [[(__bridge id<MTLDevice>)m_ptr newLibraryWithSource:nsSource
+                                                                              options:(__bridge MTLCompileOptions*)options.GetPtr()
+                                                                                error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }                            
 
         return ns::Handle{ (__bridge void*)library };
@@ -1387,8 +1387,8 @@ namespace mtlpp
                                                     options:(__bridge MTLCompileOptions*)options.GetPtr()
                                           completionHandler:^(id <MTLLibrary> library, NSError * error) {
                                                 completionHandler(
-                                                    ns::Handle{ (__bridge void*)library },
-                                                    ns::Handle{ (__bridge void*)error });
+                                                    ns::Handle{ (__bridge void*)[library autorelease] },
+                                                    ns::Handle{ (__bridge void*)[error autorelease] });
                                           }];
     }
 
@@ -1400,12 +1400,12 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<MTLRenderPipelineState> renderPipelineState = [(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
-                                                                                                                       error:nsErrorPtr];
+        id<MTLRenderPipelineState> renderPipelineState = [[(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
+                                                                                                                        error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)renderPipelineState };
@@ -1423,18 +1423,18 @@ namespace mtlpp
         MTLRenderPipelineReflection* reflection = NULL;
         MTLRenderPipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
 
-        id<MTLRenderPipelineState> renderPipelineState = [(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
-                                                                                                                     options:MTLPipelineOption(options)
-                                                                                                                  reflection:reflectionPtr
-                                                                                                                       error:nsErrorPtr];
+        id<MTLRenderPipelineState> renderPipelineState = [[(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
+                                                                                                                      options:MTLPipelineOption(options)
+                                                                                                                   reflection:reflectionPtr
+                                                                                                                        error:nsErrorPtr] autorelease];
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         // Reflection update
         if(outReflection && reflection){
-            *outReflection = ns::Handle{ (__bridge void*)reflection };
+            *outReflection = ns::Handle{ (__bridge void*)[reflection autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)renderPipelineState };
@@ -1446,8 +1446,8 @@ namespace mtlpp
         [(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
                                                           completionHandler:^(id <MTLRenderPipelineState> renderPipelineState, NSError * error) {
                                                               completionHandler(
-                                                                  ns::Handle{ (__bridge void*)renderPipelineState },
-                                                                  ns::Handle{ (__bridge void*)error }
+                                                                  ns::Handle{ (__bridge void*)[renderPipelineState autorelease] },
+                                                                  ns::Handle{ (__bridge void*)[error autorelease] }
                                                               );
                                                           }];
     }
@@ -1459,9 +1459,9 @@ namespace mtlpp
                                                                     options:MTLPipelineOption(options)
                                                           completionHandler:^(id <MTLRenderPipelineState> renderPipelineState, MTLRenderPipelineReflection * reflection, NSError * error) {
                                                               completionHandler(
-                                                                  ns::Handle{ (__bridge void*)renderPipelineState },
-                                                                  ns::Handle{ (__bridge void*)reflection },
-                                                                  ns::Handle{ (__bridge void*)error }
+                                                                  ns::Handle{ (__bridge void*)[renderPipelineState autorelease] },
+                                                                  ns::Handle{ (__bridge void*)[reflection autorelease] },
+                                                                  ns::Handle{ (__bridge void*)[error autorelease] }
                                                               );
                                                           }];
     }
@@ -1474,12 +1474,12 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<MTLComputePipelineState> state = [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithFunction:(__bridge id<MTLFunction>)computeFunction.GetPtr()
-                                                                                                         error:nsErrorPtr];
+        id<MTLComputePipelineState> state = [[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithFunction:(__bridge id<MTLFunction>)computeFunction.GetPtr()
+                                                                                                          error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)state };
@@ -1497,8 +1497,8 @@ namespace mtlpp
         [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithFunction:(__bridge id<MTLFunction>)computeFunction.GetPtr()
                                                          completionHandler:^(id <MTLComputePipelineState> computePipelineState, NSError * error) {
                                                              completionHandler(
-                                                                 ns::Handle{ (__bridge void*)computePipelineState },
-                                                                 ns::Handle{ (__bridge void*)error }
+                                                                 ns::Handle{ (__bridge void*)[computePipelineState autorelease] },
+                                                                 ns::Handle{ (__bridge void*)[error autorelease] }
                                                              );
                                                          }];
     }
@@ -1510,9 +1510,9 @@ namespace mtlpp
                                                                    options:MTLPipelineOption(options)
                                                          completionHandler:^(id <MTLComputePipelineState> computePipelineState, MTLComputePipelineReflection * reflection, NSError * error) {
                                                              completionHandler(
-                                                                 ns::Handle{ (__bridge void*)computePipelineState },
-                                                                 ns::Handle{ (__bridge void*)reflection },
-                                                                 ns::Handle{ (__bridge void*)error }
+                                                                 ns::Handle{ (__bridge void*)[computePipelineState autorelease] },
+                                                                 ns::Handle{ (__bridge void*)[reflection autorelease] },
+                                                                 ns::Handle{ (__bridge void*)[error autorelease] }
                                                              );
                                                          }];
     }
@@ -1529,19 +1529,19 @@ namespace mtlpp
         MTLComputePipelineReflection* reflection = NULL;
         MTLComputePipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
 
-        id<MTLComputePipelineState> state = [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
-                                                                                                         options:MTLPipelineOption(options)
-                                                                                                      reflection:reflectionPtr
-                                                                                                           error:nsErrorPtr];
+        id<MTLComputePipelineState> state = [[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
+                                                                                                          options:MTLPipelineOption(options)
+                                                                                                       reflection:reflectionPtr
+                                                                                                            error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         // Reflection update
         if(outReflection && reflection){
-            *outReflection = ns::Handle{ (__bridge void*)reflection };
+            *outReflection = ns::Handle{ (__bridge void*)[reflection autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)state };
@@ -1556,12 +1556,12 @@ namespace mtlpp
 #if MTLPP_IS_AVAILABLE(10_11, 9_0)
         [(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
                                                                      options:MTLPipelineOption(options)
-                                                         completionHandler:^(id <MTLComputePipelineState> computePipelineState, MTLComputePipelineReflection * reflection, NSError * error)
+                                                           completionHandler:^(id <MTLComputePipelineState> computePipelineState, MTLComputePipelineReflection * reflection, NSError * error)
                                                                     {
                                                                         completionHandler(
-                                                                            ns::Handle{ (__bridge void*)computePipelineState },
-                                                                            ns::Handle{ (__bridge void*)reflection },
-                                                                            ns::Handle{ (__bridge void*)error });
+                                                                            ns::Handle{ (__bridge void*)[computePipelineState autorelease] },
+                                                                            ns::Handle{ (__bridge void*)[reflection autorelease] },
+                                                                            ns::Handle{ (__bridge void*)[error autorelease] });
                                                                     }];
 #endif
     }
@@ -1570,7 +1570,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLDevice>)m_ptr newFence] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLDevice>)m_ptr newFence] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -1720,7 +1720,7 @@ namespace mtlpp
 {
     FunctionConstantValues::FunctionConstantValues() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstantValues alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLFunctionConstantValues alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -1925,7 +1925,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLHeap>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLHeap>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -1936,7 +1936,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLHeap>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)desc.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLHeap>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)desc.GetPtr()] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -1971,7 +1971,7 @@ namespace mtlpp
 namespace mtlpp
 {
     VertexAttribute::VertexAttribute() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexAttribute alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexAttribute alloc] init] autorelease] })
     {
     }
 
@@ -2021,7 +2021,7 @@ namespace mtlpp
 
     Attribute::Attribute() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLAttribute alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLAttribute alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -2090,7 +2090,7 @@ namespace mtlpp
 
     FunctionConstant::FunctionConstant() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstant alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLFunctionConstant alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -2274,7 +2274,7 @@ namespace mtlpp
     Function Library::NewFunction(const ns::String& functionName)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()] autorelease] };
     }
 
     Function Library::NewFunction(const ns::String& functionName, const FunctionConstantValues& constantValues, ns::Error* error)
@@ -2285,13 +2285,13 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<Function> function = [(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
-                                                                     constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
-                                                                              error:nsErrorPtr];
+        id<MTLFunction> function = [[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
+                                                                         constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
+                                                                                  error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)function };
@@ -2308,7 +2308,7 @@ namespace mtlpp
              newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
              constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
              completionHandler:^(id <MTLFunction> mtlFunction, NSError* error){
-                 completionHandler(ns::Handle{ (__bridge void*)mtlFunction }, ns::Handle{ (__bridge void*)error });
+                 completionHandler(ns::Handle{ (__bridge void*)[mtlFunction autorelease] }, ns::Handle{ (__bridge void*)[error autorelease] });
              }];
 #endif
     }
@@ -2420,7 +2420,7 @@ namespace ns
     }
 
     Error::Error() :
-        Object(Handle{ (__bridge void*)[[NSError alloc] init] })
+        Object(Handle{ (__bridge void*)[[[NSError alloc] init] autorelease] })
     {
 
     }
@@ -3064,7 +3064,7 @@ namespace mtlpp
 namespace mtlpp
 {
     RenderPassAttachmentDescriptor::RenderPassAttachmentDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPassAttachmentDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPassAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3189,7 +3189,7 @@ namespace mtlpp
     }
 
     RenderPassColorAttachmentDescriptor::RenderPassColorAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassColorAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassColorAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3208,7 +3208,7 @@ namespace mtlpp
     }
 
     RenderPassDepthAttachmentDescriptor::RenderPassDepthAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassDepthAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassDepthAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3243,7 +3243,7 @@ namespace mtlpp
     }
 
     RenderPassStencilAttachmentDescriptor::RenderPassStencilAttachmentDescriptor() :
-        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[MTLRenderPassStencilAttachmentDescriptor alloc] init] })
+        RenderPassAttachmentDescriptor(ns::Handle{ (__bridge void*)[[[MTLRenderPassStencilAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3260,7 +3260,7 @@ namespace mtlpp
     }
 
     RenderPassDescriptor::RenderPassDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPassDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPassDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3340,7 +3340,7 @@ namespace mtlpp
 namespace mtlpp
 {
     RenderPipelineColorAttachmentDescriptor::RenderPipelineColorAttachmentDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineColorAttachmentDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineColorAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3453,7 +3453,7 @@ namespace mtlpp
     }
 
     RenderPipelineReflection::RenderPipelineReflection() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineReflection alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineReflection alloc] init] autorelease] })
     {
     }
 
@@ -3470,7 +3470,7 @@ namespace mtlpp
     }
 
     RenderPipelineDescriptor::RenderPipelineDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -3846,7 +3846,7 @@ namespace mtlpp
 namespace mtlpp
 {
     SamplerDescriptor::SamplerDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLSamplerDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLSamplerDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -4047,7 +4047,7 @@ namespace mtlpp
 {
     BufferLayoutDescriptor::BufferLayoutDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLBufferLayoutDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLBufferLayoutDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -4110,7 +4110,7 @@ namespace mtlpp
 
     AttributeDescriptor::AttributeDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLAttributeDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLAttributeDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -4173,7 +4173,7 @@ namespace mtlpp
 
     StageInputOutputDescriptor::StageInputOutputDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStageInputOutputDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStageInputOutputDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -4260,7 +4260,7 @@ namespace mtlpp
 namespace mtlpp
 {
     TextureDescriptor::TextureDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLTextureDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLTextureDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -4633,16 +4633,16 @@ namespace mtlpp
     Texture Texture::NewTextureView(PixelFormat pixelFormat)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)] autorelease] };
     }
 
     Texture Texture::NewTextureView(PixelFormat pixelFormat, TextureType textureType, const ns::Range& mipmapLevelRange, const ns::Range& sliceRange)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)
-                                                                                             textureType:MTLTextureType(textureType)
-                                                                                                  levels:NSMakeRange(mipmapLevelRange.Location, mipmapLevelRange.Length)
-                                                                                                  slices:NSMakeRange(sliceRange.Location, sliceRange.Length)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)
+                                                                                              textureType:MTLTextureType(textureType)
+                                                                                                   levels:NSMakeRange(mipmapLevelRange.Location, mipmapLevelRange.Length)
+                                                                                                   slices:NSMakeRange(sliceRange.Location, sliceRange.Length)] autorelease] };
     }
 }
 
@@ -4660,7 +4660,7 @@ namespace mtlpp
 namespace mtlpp
 {
     VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexBufferLayoutDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexBufferLayoutDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -4701,7 +4701,7 @@ namespace mtlpp
     }
 
     VertexAttributeDescriptor::VertexAttributeDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexAttributeDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexAttributeDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -4742,7 +4742,7 @@ namespace mtlpp
     }
 
     VertexDescriptor::VertexDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexDescriptor alloc] init] autorelease] })
     {
     }
 

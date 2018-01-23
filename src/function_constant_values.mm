@@ -12,7 +12,7 @@ namespace mtlpp
 {
     FunctionConstantValues::FunctionConstantValues() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstantValues alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLFunctionConstantValues alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif

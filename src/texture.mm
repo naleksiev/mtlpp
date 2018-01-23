@@ -9,7 +9,7 @@
 namespace mtlpp
 {
     TextureDescriptor::TextureDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLTextureDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLTextureDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -382,15 +382,15 @@ namespace mtlpp
     Texture Texture::NewTextureView(PixelFormat pixelFormat)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)] autorelease] };
     }
 
     Texture Texture::NewTextureView(PixelFormat pixelFormat, TextureType textureType, const ns::Range& mipmapLevelRange, const ns::Range& sliceRange)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)
-                                                                                             textureType:MTLTextureType(textureType)
-                                                                                                  levels:NSMakeRange(mipmapLevelRange.Location, mipmapLevelRange.Length)
-                                                                                                  slices:NSMakeRange(sliceRange.Location, sliceRange.Length)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLTexture>)m_ptr newTextureViewWithPixelFormat:MTLPixelFormat(pixelFormat)
+                                                                                              textureType:MTLTextureType(textureType)
+                                                                                                   levels:NSMakeRange(mipmapLevelRange.Location, mipmapLevelRange.Length)
+                                                                                                   slices:NSMakeRange(sliceRange.Location, sliceRange.Length)] autorelease] };
     }
 }

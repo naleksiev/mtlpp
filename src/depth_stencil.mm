@@ -9,7 +9,7 @@
 namespace mtlpp
 {
     StencilDescriptor::StencilDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStencilDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStencilDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -86,7 +86,7 @@ namespace mtlpp
     }
 
     DepthStencilDescriptor::DepthStencilDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLDepthStencilDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLDepthStencilDescriptor alloc] init] autorelease] })
     {
     }
 

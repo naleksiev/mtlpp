@@ -9,7 +9,7 @@
 namespace mtlpp
 {
     SamplerDescriptor::SamplerDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLSamplerDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLSamplerDescriptor alloc] init] autorelease] })
     {
     }
 

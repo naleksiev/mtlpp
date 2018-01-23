@@ -10,7 +10,7 @@
 namespace mtlpp
 {
     RenderPipelineColorAttachmentDescriptor::RenderPipelineColorAttachmentDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineColorAttachmentDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineColorAttachmentDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -123,7 +123,7 @@ namespace mtlpp
     }
 
     RenderPipelineReflection::RenderPipelineReflection() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineReflection alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineReflection alloc] init] autorelease] })
     {
     }
 
@@ -140,7 +140,7 @@ namespace mtlpp
     }
 
     RenderPipelineDescriptor::RenderPipelineDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLRenderPipelineDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLRenderPipelineDescriptor alloc] init] autorelease] })
     {
     }
 

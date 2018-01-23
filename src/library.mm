@@ -11,7 +11,7 @@
 namespace mtlpp
 {
     VertexAttribute::VertexAttribute() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexAttribute alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexAttribute alloc] init] autorelease] })
     {
     }
 
@@ -61,7 +61,7 @@ namespace mtlpp
 
     Attribute::Attribute() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLAttribute alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLAttribute alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -130,7 +130,7 @@ namespace mtlpp
 
     FunctionConstant::FunctionConstant() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLFunctionConstant alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLFunctionConstant alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -314,7 +314,7 @@ namespace mtlpp
     Function Library::NewFunction(const ns::String& functionName)
     {
         Validate();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()] autorelease] };
     }
 
     Function Library::NewFunction(const ns::String& functionName, const FunctionConstantValues& constantValues, ns::Error* error)
@@ -325,13 +325,13 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<MTLFunction> function = [(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
-                                                                        constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
-                                                                                 error:nsErrorPtr];
+        id<MTLFunction> function = [[(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
+                                                                         constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
+                                                                                  error:nsErrorPtr] autorelease];
 
         // Error update
         if (error && nsError){
-            *error = ns::Handle{ (__bridge void*)nsError };
+            *error = ns::Handle{ (__bridge void*)[nsError autorelease] };
         }
 
         return ns::Handle{ (__bridge void*)function };
@@ -348,7 +348,7 @@ namespace mtlpp
              newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
              constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
              completionHandler:^(id <MTLFunction> mtlFunction, NSError* error){
-                 completionHandler(ns::Handle{ (__bridge void*)mtlFunction }, ns::Handle{ (__bridge void*)error });
+                 completionHandler(ns::Handle{ (__bridge void*)[mtlFunction autorelease] }, ns::Handle{ (__bridge void*)[error autorelease] });
              }];
 #endif
     }
