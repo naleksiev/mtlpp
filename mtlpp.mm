@@ -2285,9 +2285,9 @@ namespace mtlpp
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
 
-        id<Function> function = [(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
-                                                                     constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
-                                                                              error:nsErrorPtr];
+        id<MTLFunction> function = [(__bridge id<MTLLibrary>)m_ptr newFunctionWithName:(__bridge NSString*)functionName.GetPtr()
+                                                                        constantValues:(__bridge MTLFunctionConstantValues*)constantValues.GetPtr()
+                                                                                 error:nsErrorPtr];
 
         // Error update
         if (error && nsError){
