@@ -1421,7 +1421,7 @@ namespace mtlpp
 
         // Reflection
         MTLRenderPipelineReflection* reflection = NULL;
-        MTLRenderPipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
+        MTLAutoreleasedRenderPipelineReflection* reflectionPtr = outReflection ? &reflection : nullptr;
 
         id<MTLRenderPipelineState> renderPipelineState = [[(__bridge id<MTLDevice>)m_ptr newRenderPipelineStateWithDescriptor:(__bridge MTLRenderPipelineDescriptor*)descriptor.GetPtr()
                                                                                                                       options:MTLPipelineOption(options)
@@ -1434,7 +1434,7 @@ namespace mtlpp
 
         // Reflection update
         if(outReflection && reflection){
-            *outReflection = ns::Handle{ (__bridge void*)[reflection autorelease] };
+            *outReflection = ns::Handle{ (__bridge void*)reflection };
         }
 
         return ns::Handle{ (__bridge void*)renderPipelineState };
@@ -1527,7 +1527,7 @@ namespace mtlpp
 
         // Reflection
         MTLComputePipelineReflection* reflection = NULL;
-        MTLComputePipelineReflection** reflectionPtr = outReflection ? &reflection : nullptr;
+        MTLAutoreleasedComputePipelineReflection* reflectionPtr = outReflection ? &reflection : nullptr;
 
         id<MTLComputePipelineState> state = [[(__bridge id<MTLDevice>)m_ptr newComputePipelineStateWithDescriptor:(__bridge MTLComputePipelineDescriptor*)descriptor.GetPtr()
                                                                                                           options:MTLPipelineOption(options)
@@ -1541,7 +1541,7 @@ namespace mtlpp
 
         // Reflection update
         if(outReflection && reflection){
-            *outReflection = ns::Handle{ (__bridge void*)[reflection autorelease] };
+            *outReflection = ns::Handle{ (__bridge void*)reflection };
         }
 
         return ns::Handle{ (__bridge void*)state };
