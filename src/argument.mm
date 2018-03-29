@@ -9,7 +9,7 @@
 namespace mtlpp
 {
     StructMember::StructMember() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStructMember alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStructMember alloc] init] autorelease] })
     {
     }
 
@@ -96,7 +96,7 @@ namespace mtlpp
     }
 
     Argument::Argument() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLArgument alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLArgument alloc] init] autorelease] })
     {
     }
 

@@ -34,7 +34,7 @@ namespace mtlpp
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(8_0)
         MTLTextureDescriptor* mtlTextureDescriptor = (__bridge MTLTextureDescriptor*)descriptor.GetPtr();
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLBuffer>)m_ptr newTextureWithDescriptor:mtlTextureDescriptor offset:offset bytesPerRow:bytesPerRow] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLBuffer>)m_ptr newTextureWithDescriptor:mtlTextureDescriptor offset:offset bytesPerRow:bytesPerRow] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif

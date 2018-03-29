@@ -160,7 +160,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLHeap>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLHeap>)m_ptr newBufferWithLength:length options:MTLResourceOptions(options)] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif
@@ -171,7 +171,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_IOS(10_0)
-        return ns::Handle{ (__bridge void*)[(__bridge id<MTLHeap>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)desc.GetPtr()] };
+        return ns::Handle{ (__bridge void*)[[(__bridge id<MTLHeap>)m_ptr newTextureWithDescriptor:(__bridge MTLTextureDescriptor*)desc.GetPtr()] autorelease] };
 #else
         return ns::Handle{ nullptr };
 #endif

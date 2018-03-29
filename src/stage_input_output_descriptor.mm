@@ -12,7 +12,7 @@ namespace mtlpp
 {
     BufferLayoutDescriptor::BufferLayoutDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLBufferLayoutDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLBufferLayoutDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -75,7 +75,7 @@ namespace mtlpp
 
     AttributeDescriptor::AttributeDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLAttributeDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLAttributeDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif
@@ -138,7 +138,7 @@ namespace mtlpp
 
     StageInputOutputDescriptor::StageInputOutputDescriptor() :
 #if MTLPP_IS_AVAILABLE(10_12, 10_0)
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLStageInputOutputDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLStageInputOutputDescriptor alloc] init] autorelease] })
 #else
         ns::Object(ns::Handle{ nullptr })
 #endif

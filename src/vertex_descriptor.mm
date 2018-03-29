@@ -9,7 +9,7 @@
 namespace mtlpp
 {
     VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexBufferLayoutDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexBufferLayoutDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -50,7 +50,7 @@ namespace mtlpp
     }
 
     VertexAttributeDescriptor::VertexAttributeDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexAttributeDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexAttributeDescriptor alloc] init] autorelease] })
     {
     }
 
@@ -91,7 +91,7 @@ namespace mtlpp
     }
 
     VertexDescriptor::VertexDescriptor() :
-        ns::Object(ns::Handle{ (__bridge void*)[[MTLVertexDescriptor alloc] init] })
+        ns::Object(ns::Handle{ (__bridge void*)[[[MTLVertexDescriptor alloc] init] autorelease] })
     {
     }
 
