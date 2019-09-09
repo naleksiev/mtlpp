@@ -81,6 +81,8 @@
 #define MTLPP_IS_AVAILABLE_IOS(ios)  (0 __DARWIN_ALIAS_STARTING_IPHONE___IPHONE_##ios( || 1 ))
 #define MTLPP_IS_AVAILABLE(mac, ios) (MTLPP_IS_AVAILABLE_MAC(mac) || MTLPP_IS_AVAILABLE_IOS(ios))
 
+# include <IOSurface/IOSurface.h>
+
 
 //////////////////////////////////////
 // FILE: ns.hpp
@@ -1177,6 +1179,7 @@ namespace mtlpp
         Buffer NewBuffer(void* pointer, uint32_t length, ResourceOptions options, std::function<void (void* pointer, uint32_t length)> deallocator);
         DepthStencilState NewDepthStencilState(const DepthStencilDescriptor& descriptor);
         Texture NewTexture(const TextureDescriptor& descriptor);
+        Texture NewTexture(const TextureDescriptor& descriptor, IOSurfaceRef ioSurface);
         //- (id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor *)descriptor iosurface:(IOSurfaceRef)iosurface plane:(NSUInteger)plane NS_AVAILABLE_MAC(10_11);
         SamplerState NewSamplerState(const SamplerDescriptor& descriptor);
         Library NewDefaultLibrary();
@@ -2718,4 +2721,3 @@ namespace mtlpp
 // #include "sampler.hpp"
 // #include "texture.hpp"
 // #include "heap.hpp"
-
