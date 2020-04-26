@@ -64,6 +64,7 @@ namespace mtlpp
         Resource() { }
         Resource(const ns::Handle& handle) : ns::Object(handle) { }
 
+        Device       GetDevice() const MTLPP_AVAILABLE(10_11, 8_0);
         ns::String   GetLabel() const;
         CpuCacheMode GetCpuCacheMode() const;
         StorageMode  GetStorageMode() const MTLPP_AVAILABLE(10_11, 9_0);
