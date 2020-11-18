@@ -1231,6 +1231,16 @@ namespace mtlpp
 #endif
     }
 
+    bool Device::IsRemovable() const
+    {
+        Validate();
+#if MTLPP_IS_AVAILABLE_MAC(10_11)
+        return [(__bridge id<MTLDevice>)m_ptr isRemovable];
+#else
+        return false;
+#endif
+    }
+
     uint64_t Device::GetRecommendedMaxWorkingSetSize() const
     {
 #if MTLPP_IS_AVAILABLE_MAC(10_12)
@@ -1353,7 +1363,7 @@ namespace mtlpp
         // Error update
         if (error && nsError){
             *error = ns::Handle{ (__bridge void*)nsError };
-        }  
+        }
 
         return ns::Handle{ (__bridge void*)library };
     }
@@ -1362,7 +1372,7 @@ namespace mtlpp
     {
         Validate();
         NSString* nsSource = [NSString stringWithUTF8String:source];
-        
+
         // Error
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
@@ -1374,7 +1384,7 @@ namespace mtlpp
         // Error update
         if (error && nsError){
             *error = ns::Handle{ (__bridge void*)nsError };
-        }                            
+        }
 
         return ns::Handle{ (__bridge void*)library };
     }
@@ -1414,7 +1424,7 @@ namespace mtlpp
     RenderPipelineState Device::NewRenderPipelineState(const RenderPipelineDescriptor& descriptor, PipelineOption options, RenderPipelineReflection* outReflection, ns::Error* error)
     {
         Validate();
-        
+
         // Error
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
@@ -1469,7 +1479,7 @@ namespace mtlpp
     ComputePipelineState Device::NewComputePipelineState(const Function& computeFunction, ns::Error* error)
     {
         Validate();
-        
+
         // Error
         NSError* nsError = NULL;
         NSError** nsErrorPtr = error ? &nsError : nullptr;
@@ -4764,4 +4774,3 @@ namespace mtlpp
         [(__bridge MTLVertexDescriptor*)m_ptr reset];
     }
 }
-
