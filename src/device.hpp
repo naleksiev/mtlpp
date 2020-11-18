@@ -90,6 +90,7 @@ namespace mtlpp
         Size       GetMaxThreadsPerThreadgroup() const MTLPP_AVAILABLE(10_11, 9_0);
         bool       IsLowPower() const MTLPP_AVAILABLE_MAC(10_11);
         bool       IsHeadless() const MTLPP_AVAILABLE_MAC(10_11);
+        bool       IsRemovable() const MTLPP_AVAILABLE_MAC(10_11);
         uint64_t   GetRecommendedMaxWorkingSetSize() const MTLPP_AVAILABLE_MAC(10_12);
         bool       IsDepth24Stencil8PixelFormatSupported() const MTLPP_AVAILABLE_MAC(10_11);
 
