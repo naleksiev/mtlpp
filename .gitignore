@@ -1,2 +1,6 @@
 .DS_Store
 .build
+*.o
+*.out
+*.so
+.vscode/

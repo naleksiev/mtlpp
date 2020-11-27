@@ -39,10 +39,4 @@ namespace mtlpp
         Validate();
         return ns::Handle { (__bridge void*)[(__bridge id<MTLCommandQueue>)m_ptr commandBuffer] };
     }
-
-    void CommandQueue::InsertDebugCaptureBoundary()
-    {
-        Validate();
-        [(__bridge id<MTLCommandQueue>)m_ptr insertDebugCaptureBoundary];
-    }
 }
