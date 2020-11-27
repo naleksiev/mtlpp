@@ -76,7 +76,7 @@ namespace mtlpp
     {
         Validate();
 #if MTLPP_IS_AVAILABLE_MAC(10_11)
-        return [(__bridge id<MTLDevice>)m_ptr removable];
+        return [(__bridge id<MTLDevice>)m_ptr isRemovable];
 #else
         return false;
 #endif

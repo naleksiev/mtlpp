@@ -2114,7 +2114,7 @@ namespace mtlpp
         void DrawIndexed(PrimitiveType primitiveType, uint32_t indexCount, IndexType indexType, const Buffer& indexBuffer, uint32_t indexBufferOffset, uint32_t instanceCount) MTLPP_AVAILABLE(10_11, 9_0);
         void DrawIndexed(PrimitiveType primitiveType, uint32_t indexCount, IndexType indexType, const Buffer& indexBuffer, uint32_t indexBufferOffset, uint32_t instanceCount, uint32_t baseVertex, uint32_t baseInstance) MTLPP_AVAILABLE(10_11, 9_0);
         void DrawIndexed(PrimitiveType primitiveType, IndexType indexType, const Buffer& indexBuffer, uint32_t indexBufferOffset, const Buffer& indirectBuffer, uint32_t indirectBufferOffset);
-        void TextureBarrier() MTLPP_AVAILABLE_MAC(10_11);
+        void TextureBarrier() MTLPP_AVAILABLE_MAC(10_11){};
         void UpdateFence(const Fence& fence, RenderStages afterStages) MTLPP_AVAILABLE_IOS(10_0);
         void WaitForFence(const Fence& fence, RenderStages beforeStages) MTLPP_AVAILABLE_IOS(10_0);
         void SetTessellationFactorBuffer(const Buffer& buffer, uint32_t offset, uint32_t instanceStride) MTLPP_AVAILABLE(10_12, 10_0);

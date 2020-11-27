@@ -429,13 +429,6 @@ namespace mtlpp
                                                       indirectBufferOffset:indirectBufferOffset];
     }
 
-    void RenderCommandEncoder::TextureBarrier()
-    {
-        Validate();
-#if MTLPP_IS_AVAILABLE_MAC(10_11)
-        [(__bridge id<MTLRenderCommandEncoder>)m_ptr textureBarrier];
-#endif
-    }
 
     void RenderCommandEncoder::UpdateFence(const Fence& fence, RenderStages afterStages)
     {
